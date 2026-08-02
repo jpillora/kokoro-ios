@@ -473,7 +473,13 @@ struct KokoroServerMain {
       return HTTPResponse(statusCode: .ok, headers: headers, body: HTTPBodySequence(from: SSEBody(stream: stream)))
     }
 
-    let server = HTTPServer(address: try .inet(ip4: host, port: port))
+    // FlyingFox defaults to a 15s per-request timeout and replaces anything
+    // slower with a bare 500 (empty body), even though the handler goes on to
+    // finish. Synthesis is serialized through the `Synthesizer` actor, so a
+    // queued request routinely waits longer than that on a busy machine —
+    // clients saw random 500s for work that had actually succeeded. This is a
+    // backstop against a wedged handler, not a queue limit.
+    let server = HTTPServer(address: try .inet(ip4: host, port: port), timeout: 300)
 
     await server.appendRoute("GET /healthz") { _ in
       HTTPResponse(statusCode: .ok, body: Data("ok".utf8))
