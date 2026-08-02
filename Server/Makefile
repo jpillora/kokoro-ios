@@ -41,6 +41,11 @@ EMBED := -Xlinker -sectcreate -Xlinker __DATA -Xlinker __kokoro_res \
 dist:
 	$(MAKE) metallib
 	swift build -c release --product KokoroServer
+	# `metallib`'s copy lands in a plain .build/release directory, which the
+	# release build above then replaces with a symlink to
+	# .build/arm64-apple-macosx/release — taking the metallib with it. Re-copy
+	# once the symlink exists, or `dist` fails on any clean .build.
+	cp $(METALLIB) .build/release/mlx.metallib
 	rm -f .build/release/kokoro-resources.tgz
 	cd .build/release && tar -czf kokoro-resources.tgz *.bundle mlx.metallib
 	swift build -c release --product KokoroServer $(EMBED)
