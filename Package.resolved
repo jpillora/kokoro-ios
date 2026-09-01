@@ -1,5 +1,5 @@
 {
-  "originHash" : "f28cc1eb7588da4b22396b55533d71553b212fe30907a6149c97ef101b36e0fb",
+  "originHash" : "78b3679c9b315884ec2499b2a5a12b1d49ebc47b7059df96e5ada8c457deb850",
   "pins" : [
     {
       "identity" : "misakiswift",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/jpillora/MisakiSwift",
       "state" : {
         "branch" : "kokoro-ios",
-        "revision" : "284f06014e064a7ec06d3de187fa32af93f9d728"
+        "revision" : "1b0ed8d41ab0dbd99e27a88d126daf05caf0953a"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ml-explore/mlx-swift",
       "state" : {
-        "revision" : "f58bd2c2b3b84316da69182f436db4219aff30b9",
-        "version" : "0.30.2"
+        "revision" : "072b684acaae80b6a463abab3a103732f33774bf",
+        "version" : "0.29.1"
       }
     },
     {
